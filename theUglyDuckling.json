@@ -1,0 +1,25 @@
+{
+  "format": "CHIP-0007",
+  "minting_tool": "Sage 0.9.6",
+  "name": "OOAK #3",
+  "description": "The Ugly Duckling",
+  "sensitive_content": false,
+  "collection": {
+    "id": "39c41ad0-f758-41b9-85f0-3dcc8e8e2194",
+    "name": "OOAK",
+    "attributes": [
+      {
+        "type": "description",
+        "value": "One Of A Kind"
+      },
+      {
+        "type": "icon",
+        "value": "https://nftstorage.link/ipfs/bafybeie6h6m2vtfkbj5s7upheb4d44vnqaztvaymgzjtzfcxqpw4le7f5m/notMickey.png"
+      },
+      {
+        "type": "banner",
+        "value": "https://nftstorage.link/ipfs/bafybeifc3rkthehqlgpvo7zlz3uguuene57dsgfdhjqfj5xdjiuiypnt4y/test_banner_0.jpg"
+      }
+    ]
+  }
+}
