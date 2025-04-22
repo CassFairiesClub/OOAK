@@ -1,0 +1,53 @@
+{
+  "format": "CHIP-0007",
+  "name": "Proof Of A Poet 4.0",
+  "description": "Proof of Attendance Protocols (POAP) for the Chia Meetup in Berlin with Gene Hoffman and friends on April 13, 2025.  During the meet up G(host) Poetia 4.0 "Hackintosh" performed— an experience yet to be released into the world.... Artwork created in collaboration with @CassXCH, the Chia Artisan! We can't thank you enough. Poetically, Futuradora",
+  "series_number": 1,
+  "series_total": 57,
+  "minting_tool": "cli@Futuradora",
+  "sensitive_content": false,
+  "attributes": [
+    {
+      "trait_type": "Poetia",
+      "value": "Berlin Calling"
+    },
+    {
+      "trait_type": "Project",
+      "value": "G(host) Poetia 4.0"
+    },
+    {
+      "trait_type": "Location",
+      "value": "Berlin"
+    },
+    {
+      "trait_type": "Community",
+      "value": "Chia"
+    }
+  ],
+  "collection": {
+    "name": "NOTNOTFORSALE",
+    "id": "8d4f181a-602c-4ec5-a063-c1a28786e48a",
+    "attributes": [
+      {
+        "type": "description",
+        "value": "A priceless collection for priceless moments."
+      },
+      {
+        "type": "twitter",
+        "value": "@Futuradora_____"
+      },
+      {
+        "type": "website",
+        "value": "https://twitter.com/Futuradora_____"
+      },
+      {
+        "type": "icon",
+        "value": "https://datalayer.link/d59c73e32581cc976fb90a73f4866b2bfcedc8cc679565c359f3b041a9bdde74/cover.gif"
+      },
+      {
+        "type": "banner",
+        "value": "https://datalayer.link/d59c73e32581cc976fb90a73f4866b2bfcedc8cc679565c359f3b041a9bdde74/Banner.png"
+      }
+    ]
+  }
+}
