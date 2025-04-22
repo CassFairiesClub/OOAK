@@ -1,7 +1,7 @@
 {
   "format": "CHIP-0007",
   "name": "Proof Of A Poet 4.0",
-  "description": "Proof of Attendance Protocols (POAP) for the Chia Meetup in Berlin with Gene Hoffman and friends on April 13, 2025.  During the meet up G(host) Poetia 4.0 "Hackintosh" performed— an experience yet to be released into the world.... Artwork created in collaboration with @CassXCH, the Chia Artisan! We can't thank you enough. Poetically, Futuradora",
+  "description": "Proof of Attendance Protocols (POAP) for the Chia Meetup in Berlin with Gene Hoffman and friends on April 13, 2025.  During the meet up G(host) Poetia 4.0 'Hackintosh' performed— an experience yet to be released into the world.... Artwork created in collaboration with @CassXCH, the Chia Artisan! We can't thank you enough. Poetically, Futuradora",
   "series_number": 1,
   "series_total": 57,
   "minting_tool": "cli@Futuradora",
