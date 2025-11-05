@@ -1,18 +1,18 @@
 {
+  "format": "CHIP-0007",
   "name": "K28/32",
   "description": "K28 is the new K32",
-  "format": "CHIP-0007",
   "minting_tool": "Cass",
   "sensitive_content": false,
   "attributes": [
     {
       "trait_type": "Airdrop",
-      "value": "K28 is the new K32"
+      "value": "001"
     }
   ],
   "collection": {
-    "id": "bb943d0b-effb-422d-bf74-e884293dc757",
     "name": "0 MOJO",
+    "id": "551df667-be80-4ec7-9741-ca7d227446f2",
     "attributes": [
       {
         "type": "description",
