@@ -1,0 +1,34 @@
+{
+  "name": "K28 is the new K32",
+  "format": "CHIP-0007",
+  "minting_tool": "Cass",
+  "sensitive_content": false,
+  "attributes": [
+    {
+      "trait_type": "Airdrop",
+      "value": "K28 is the new K32"
+    }
+  ],
+  "collection": {
+    "id": "bb943d0b-effb-422d-bf74-e884293dc757",
+    "name": "0 MOJO",
+    "attributes": [
+      {
+        "type": "description",
+        "value": "Follow @CassXCH for free NFTs"
+      },
+      {
+        "type": "icon",
+        "value": "https://go4.me/collection-icon.png"
+      },
+      {
+        "type": "banner",
+        "value": "https://go4.me/collection-banner.png"
+      },
+      {
+        "type": "twitter",
+        "value": "@CassXCH"
+      }
+    ]
+  }
+}
