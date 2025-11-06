@@ -1,6 +1,6 @@
 {
   "format": "CHIP-0007",
-  "name": "K28/32",
+  "name": "K28-32",
   "description": "K28 is the new K32",
   "minting_tool": "Cass",
   "sensitive_content": false,
@@ -33,3 +33,4 @@
     ]
   }
 }
+
