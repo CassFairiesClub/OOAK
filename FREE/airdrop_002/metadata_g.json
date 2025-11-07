@@ -1,13 +1,13 @@
 {
   "format": "CHIP-0007",
   "name": "Gene",
-  "description": "Bargemen #2",
+  "description": "barGEmEN",
   "minting_tool": "Cass",
   "sensitive_content": false,
   "attributes": [
     {
       "trait_type": "Airdrop",
-      "value": "002"
+      "value": "002-G"
     }
   ],
   "collection": {
@@ -32,4 +32,5 @@
       }
     ]
   }
+
 }
