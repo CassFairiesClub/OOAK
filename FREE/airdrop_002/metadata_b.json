@@ -1,13 +1,13 @@
 {
   "format": "CHIP-0007",
   "name": "Bram",
-  "description": "Bargemen #1",
+  "description": "BARgeMen",
   "minting_tool": "Cass",
   "sensitive_content": false,
   "attributes": [
     {
       "trait_type": "Airdrop",
-      "value": "002"
+      "value": "002-B"
     }
   ],
   "collection": {
@@ -32,4 +32,5 @@
       }
     ]
   }
+
 }
