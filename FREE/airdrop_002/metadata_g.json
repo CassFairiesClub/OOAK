@@ -1,0 +1,35 @@
+{
+  "format": "CHIP-0007",
+  "name": "Gene",
+  "description": "Bargemen #2",
+  "minting_tool": "Cass",
+  "sensitive_content": false,
+  "attributes": [
+    {
+      "trait_type": "Airdrop",
+      "value": "002"
+    }
+  ],
+  "collection": {
+    "name": "0 MOJO",
+    "id": "551df667-be80-4ec7-9741-ca7d227446f2",
+    "attributes": [
+      {
+        "type": "description",
+        "value": "Follow @CassXCH for free NFTs"
+      },
+      {
+        "type": "icon",
+        "value": "https://raw.githubusercontent.com/CassFairiesClub/OOAK/refs/heads/main/FREE/free.png"
+      },
+      {
+        "type": "banner",
+        "value": "https://raw.githubusercontent.com/CassFairiesClub/OOAK/refs/heads/main/FREE/free_banner.png"
+      },
+      {
+        "type": "twitter",
+        "value": "@CassXCH"
+      }
+    ]
+  }
+}
