@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>MultiCass</title>
+    <link rel="preload" href="./led.ttf" as="font" type="font/ttf" />
+    <title>TheSlide</title>
     <style>
+        @font-face {
+            font-family: digital7; /* set name */
+            src: url(./led.ttf); /* url of the font */
+        }
         html,
         body {
             margin: 0;
@@ -24,10 +28,6 @@
             background-color: blue;
             font: "digital7";
         }
-        @font-face {
-            font-family: digital7; /* set name */
-            src: url(./led.ttf); /* url of the font */
-        }
         #mycanvas {
             box-sizing: border-box;
             margin: 0;
@@ -35,7 +35,6 @@
             font: "digital7";
         }
     </style>
-    <link rel="preload" href="./led.ttf" as="font" type="font/ttf" />
 </head>
 
 <body>
