@@ -22,6 +22,7 @@
             display: flex;
             justify-content: center;
             background-color: blue;
+            font: "digital7";
         }
         @font-face {
             font-family: digital7; /* set name */
@@ -39,8 +40,7 @@
 
 <body>
     <div id="middle">
-
-        <canvas id="mycanvas"></canvas>
+        <canvas id="mycanvas" width="500" height="500">s</canvas>
     </div>
     
 <script type="module">
@@ -168,7 +168,6 @@ var h = document.getElementById("middle").clientHeight;
 
 ctx.canvas.width = w;
 ctx.canvas.height = h;
-
 console.log("w - h : " + w + "-" + h)
 
 ctx.font = "xx-large digital7";
@@ -180,10 +179,12 @@ let dif_text = ctx.measureText("DIFFICULTY ")
 let mem_text = ctx.measureText("MEMPOOL SIZE ")
 let space_text = ctx.measureText("TOTAL NETSPACE ")
 
+console.log(space_text.width)
+
 const BLOCK = {
   x1: w/10,
   y1: h/20,
-  x2: 500,
+  x2: 1000,
   vx: -20,
   hue: 100,
   height1: 0,
