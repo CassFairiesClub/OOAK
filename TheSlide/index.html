@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MultiCass</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: grey;
+        }
+         #middle {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            background-color: blue;
+        }
+        @font-face {
+            font-family: digital7; /* set name */
+            src: url(./led.ttf); /* url of the font */
+        }
+        #mycanvas {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font: "digital7";
+        }
+    </style>
+    <link rel="preload" href="./led.ttf" as="font" type="font/ttf" />
+</head>
+
+<body>
+    <div id="middle">
+
+        <canvas id="mycanvas"></canvas>
+    </div>
+    
+<script type="module">
+function truncateDecimals(number, digits) {
+    var multiplier = Math.pow(10, digits),
+        adjustedNum = number * multiplier,
+        truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
+
+    return truncatedNum / multiplier;
+};
+
+function numberWithSpaces(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+
+//============================  BLOCKCHAIN STATE  ====================================
+function blockchain_state() {
+    fetch("https://api.coinset.org/get_blockchain_state", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify({}),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    return response.json();
+    })
+    .then((data) => {
+        //console.log('Blockchain State:', data);
+        //BLOCK.hue += BLOCK.vx;
+        BLOCK.height1 = BLOCK.height2;
+        BLOCK.spi1 = BLOCK.spi2;
+        BLOCK.abt1 = BLOCK.abt2;
+        BLOCK.dif1 = BLOCK.dif2;
+        BLOCK.msize1 = BLOCK.msize2;
+        BLOCK.mcost1 = BLOCK.mcost2;
+        BLOCK.mfees1 = BLOCK.mfees2;
+        BLOCK.space1 = BLOCK.space2;
+
+        ABT = data.blockchain_state.average_block_time + " seconds";
+        DIF = data.blockchain_state.difficulty;
+        MEMFEES = data.blockchain_state.mempool_fees;
+        MEMCOST = data.blockchain_state.mempool_cost;
+        MEMSIZE = data.blockchain_state.mempool_size;
+        DEF = data.blockchain_state.peak.deficit;
+        HEIGHT = data.blockchain_state.peak.height;
+        OVERF = data.blockchain_state.peak.overflow;
+        RITER = data.blockchain_state.peak.required_iters;
+        SPI = data.blockchain_state.peak.signage_point_index + "/64";
+        SSITERS = data.blockchain_state.peak.sub_slot_iters;
+        WEIGHT = data.blockchain_state.peak.weight;
+        SPACE = data.blockchain_state.space;
+        HEADER = data.blockchain_state.peak.header_hash;
+
+        BLOCK.height2 = HEIGHT;
+        BLOCK.spi2 = SPI;
+        BLOCK.abt2 = ABT;
+        BLOCK.dif2 = DIF;
+        BLOCK.msize2 = MEMSIZE;
+        BLOCK.mcost2 = MEMCOST;
+        BLOCK.mfees2 = MEMFEES;
+        BLOCK.space2 = SPACE;
+
+
+        BLOCK.x2 = canvas.width;
+        raf = window.requestAnimationFrame(animate);
+
+        
+        //drawDATA(data);
+    })
+    .catch((error) => {
+        console.error('Fetch error:', error);
+    });
+};
+
+function animate() {
+
+  
+  if ( BLOCK.x2 > w/10 ) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    raf = window.requestAnimationFrame(animate);
+    //ball.x += ball.vx;
+    BLOCK.x2 += BLOCK.vx;
+    BLOCK.x1 += BLOCK.vx;
+    BLOCK.hue += 1;
+    
+    //ball.drawball();
+    BLOCK.drawtext();
+  } else {
+    window.cancelAnimationFrame(raf);
+    BLOCK.x2 = canvas.width;
+    BLOCK.x1 = w/10;
+  }
+
+};
+
+//============================  INIT  ====================================
+var mycolor = "#00000000";
+var ABT;
+var DIF;
+var MEMFEES;
+var MEMSIZE;
+var DEF;
+var HEIGHT;
+var OVERF;
+var RITER;
+var SPI;
+var SSITERS;
+var TITERS;
+var WEIGHT;
+var SPACE;
+var MEMCOST;
+var HEADER;
+
+
+var canvas = document.getElementById("mycanvas");
+var ctx = canvas.getContext("2d");
+var w = document.getElementById("middle").clientWidth;
+var h = document.getElementById("middle").clientHeight;
+
+ctx.canvas.width = w;
+ctx.canvas.height = h;
+
+console.log("w - h : " + w + "-" + h)
+
+ctx.font = "xx-large digital7";
+//ctx.font = Math.round(4*h/100) + "px digital7";
+let bh_text = ctx.measureText("BLOCK HEIGHT ")
+let spi_text = ctx.measureText("SIGNAGE POINT INDEX ")
+let abt_text = ctx.measureText("AVERAGE BLOCK TIME ")
+let dif_text = ctx.measureText("DIFFICULTY ")
+let mem_text = ctx.measureText("MEMPOOL SIZE ")
+let space_text = ctx.measureText("TOTAL NETSPACE ")
+
+const BLOCK = {
+  x1: w/10,
+  y1: h/20,
+  x2: 500,
+  vx: -20,
+  hue: 100,
+  height1: 0,
+  height2: 0,
+  spi1: 0,
+  spi2: 0,
+  abt1: 0,
+  abt2: 0,
+  dif1: 0,
+  dif2: 0,
+  msize1: 0,
+  msize2: 0,
+  mcost1: 0,
+  mcost2: 0,
+  mfees1: 0,
+  mfees2: 0,
+  space1: 0,
+  space2: 0,
+drawtext() {
+    //ctx.fillStyle = "green";HSL(120,100,50)
+    ctx.fillStyle = "HSL(" + this.hue % 360 + ",100%,50%)";
+    ctx.fillText("BLOCK HEIGHT", this.x1, 6*this.y1);
+    ctx.fillText("BLOCK HEIGHT", this.x2, 6*this.y1);
+    ctx.fillText("SIGNAGE POINT INDEX", this.x1, 7*this.y1);
+    ctx.fillText("SIGNAGE POINT INDEX", this.x2, 7*this.y1);
+    ctx.fillText("AVERAGE BLOCK TIME", this.x1, 8*this.y1);
+    ctx.fillText("AVERAGE BLOCK TIME", this.x2, 8*this.y1);
+    ctx.fillText("DIFFICULTY", this.x1, 9*this.y1);
+    ctx.fillText("DIFFICULTY", this.x2, 9*this.y1);
+    ctx.fillText("MEMPOOL SIZE", this.x1, 10*this.y1);
+    ctx.fillText("MEMPOOL SIZE", this.x2, 10*this.y1);
+    ctx.fillText("MEMPOOL FEES", this.x1, 11*this.y1);
+    ctx.fillText("MEMPOOL FEES", this.x2, 11*this.y1);
+    ctx.fillText("MEMPOOL COST", this.x1, 12*this.y1);
+    ctx.fillText("MEMPOOL COST", this.x2, 12*this.y1);
+    ctx.fillText("TOTAL NETSPACE", this.x1, 13*this.y1);
+    ctx.fillText("TOTAL NETSPACE", this.x2, 13*this.y1);
+    //ctx.fillStyle = "lime";
+    ctx.fillStyle = "HSL(" + 15 + this.hue % 360 + ",100%,50%)";
+    ctx.fillText(numberWithSpaces(BLOCK.height1), this.x1 + bh_text.width, 6*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.height2), this.x2 + bh_text.width, 6*this.y1);
+    ctx.fillText(BLOCK.spi1, this.x1 + spi_text.width, 7*this.y1);
+    ctx.fillText(BLOCK.spi2, this.x2 + spi_text.width, 7*this.y1);
+    ctx.fillText(BLOCK.abt1, this.x1 + abt_text.width, 8*this.y1);
+    ctx.fillText(BLOCK.abt2, this.x2 + abt_text.width, 8*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.dif1), this.x1 + dif_text.width, 9*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.dif2), this.x2 + dif_text.width, 9*this.y1);
+    ctx.fillText(BLOCK.msize1, this.x1 + mem_text.width, 10*this.y1);
+    ctx.fillText(BLOCK.msize2, this.x2 + mem_text.width, 10*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mfees1), this.x1 + mem_text.width, 11*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mfees2), this.x2 + mem_text.width, 11*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mcost1), this.x1 + mem_text.width, 12*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mcost2), this.x2 + mem_text.width, 12*this.y1);
+    ctx.fillText(truncateDecimals(BLOCK.space1/1000000000000000000, 5) + " EB", this.x1 + space_text.width, 13*this.y1);
+    ctx.fillText(truncateDecimals(BLOCK.space2/1000000000000000000, 5) + " EB", this.x2 + space_text.width, 13*this.y1);
+    
+  },
+
+};
+
+
+
+
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+blockchain_state();
+console.log(ctx.canvas.width);
+console.log("font size : " + 4*ctx.canvas.width/100 + "-" + 4*w/100);
+
+const ws = new WebSocket('wss://api.coinset.org/ws');
+ws.onmessage = (event) => {
+  const message = JSON.parse(event.data);
+  switch (message.type) {
+    case 'offer':
+      //console.log('New offer:', message.data.offer);
+      break;
+    case 'peak':
+      console.log('New block height:', message.data.height);
+        blockchain_state();
+        
+      break;
+    case 'transaction':
+      //console.log('New transaction:', message.data.id);
+      break;
+  }
+};
+
+
+let raf;
+
+/*
+
+const ball = {
+  x: canvas.width,
+  y: 100,
+  vx: -10,
+  vy: 2,
+  radius: 25,
+  color: "blue",
+  drawball() {
+    //ctx.beginPath();
+    // ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+    // ctx.closePath();
+    // ctx.fillStyle = this.color;
+    // ctx.fill();
+    ctx.font = 4*canvas.width/100 + "px digital7";
+    ctx.fillStyle = "green";
+    ctx.fillText("BLOCK HEIGHT", this.x, this.y);
+
+  },
+};
+
+function draw() {
+  
+  
+  
+  if ( ball.x > -100 ) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    raf = window.requestAnimationFrame(draw);
+    ball.x += ball.vx;
+    ball.drawball();
+  } else {
+    window.cancelAnimationFrame(raf);
+    ball.x = canvas.width;
+  }
+  
+
+}
+
+
+//ball.draw();
+
+
+canvas.addEventListener("mouseover", (e) => {
+  raf = window.requestAnimationFrame(draw);
+  console.log(raf)
+});
+
+canvas.addEventListener("mouseout", (e) => {
+  window.cancelAnimationFrame(raf);
+});
+*/
+
+  //ball.y += ball.vy;
+/*
+  if (
+    ball.y + ball.vy > canvas.height - ball.radius ||
+    ball.y + ball.vy < ball.radius
+  ) {
+    ball.vy = -ball.vy;
+  }
+  if (
+    ball.x + ball.vx > canvas.width - ball.radius ||
+    ball.x + ball.vx < ball.radius
+  ) {
+    ball.vx = -ball.vx;
+  }
+*/
+//============================  DRAW DATA  ====================================
+function drawDATA(data) {
+    ctx.font = 4*canvas.width/100 + "px digital7";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "green";
+ctx.fillText("BLOCK HEIGHT", 32*ctx.canvas.width/64, 59*ctx.canvas.width/128);
+ctx.fillText("Index ", 32*ctx.canvas.width/64, 71*ctx.canvas.width/128);
+ctx.fillText("AVG B T ", 42*ctx.canvas.width/64, 77*ctx.canvas.width/128);
+ctx.fillText("DIFF ", 32*ctx.canvas.width/64, 83*ctx.canvas.width/128);
+ctx.fillText("PEAK WEIGHT", 32*ctx.canvas.width/64, 89*ctx.canvas.width/128);
+            
+ctx.fillStyle = "lime";
+ctx.fillText(numberWithSpaces(HEIGHT), 32*ctx.canvas.width/64, 65*ctx.canvas.width/128);
+ctx.fillText(SPI, 44*ctx.canvas.width/64, 71*ctx.canvas.width/128);
+ctx.fillText(ABT, 32*ctx.canvas.width/64, 77*ctx.canvas.width/128);
+ctx.fillText(DIF, 42*ctx.canvas.width/64, 83*ctx.canvas.width/128);
+ctx.fillText(WEIGHT, 32*ctx.canvas.width/64, 95*ctx.canvas.width/128);
+
+
+            ctx.fillStyle = "tomato";
+            ctx.fillText("XCH MEMPOOL", 19*ctx.canvas.width/128, 59*ctx.canvas.width/128);
+            ctx.fillText("SIZE", 19*ctx.canvas.width/128, 65*ctx.canvas.width/128);
+            ctx.fillText("COST", 19*ctx.canvas.width/128, 71*ctx.canvas.width/128);
+            ctx.fillText("FEES", 19*ctx.canvas.width/128, 77*ctx.canvas.width/128);
+            ctx.fillText("TOT NETSPACE", 19*ctx.canvas.width/128, 83*ctx.canvas.width/128);
+            ctx.fillText("by cassxch", 19*ctx.canvas.width/128, 95*ctx.canvas.width/128);
+            
+            ctx.fillStyle = "red";
+            ctx.fillText(MEMSIZE, 37*ctx.canvas.width/128, 65*ctx.canvas.width/128);
+            ctx.fillText(truncateDecimals(MEMCOST/1000000000000, 6), 37*ctx.canvas.width/128, 71*ctx.canvas.width/128);
+            ctx.fillText(truncateDecimals(MEMFEES/1000000000000, 6), 37*ctx.canvas.width/128, 77*ctx.canvas.width/128);
+            ctx.fillText(truncateDecimals(SPACE/1000000000000000000, 5) + " EB", 19*ctx.canvas.width/128, 89*ctx.canvas.width/128);
+ctx.fillStyle = "blue";
+            ctx.fillText("HEADER HASH", 21*ctx.canvas.width/64, 26*ctx.canvas.width/128);
+            ctx.fillStyle = "lightblue";
+            ctx.fillText(HEADER.substring(0,11), 21*ctx.canvas.width/64, 32*ctx.canvas.width/128);
+            ctx.fillText(HEADER.substring(11,22), 21*ctx.canvas.width/64, 38*ctx.canvas.width/128);
+            ctx.fillText(HEADER.substring(22,33), 21*ctx.canvas.width/64, 44*ctx.canvas.width/128);
+            ctx.fillText(HEADER.substring(33,44), 21*ctx.canvas.width/64, 50*ctx.canvas.width/128);
+            ctx.fillText(HEADER.substring(44,55), 21*ctx.canvas.width/64, 56*ctx.canvas.width/128);
+            ctx.fillText(HEADER.substring(55,66), 21*ctx.canvas.width/64, 62*ctx.canvas.width/128);
+};
+
+    </script>
+</body>
+
+</html>
