@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" href="led.ttf" as="font" type="font/ttf" />
+    <!-- <link rel="preload" href="led.ttf" as="font" type="font/ttf" /> -->
     <title>TheSlide</title>
 </head>
 
@@ -131,13 +131,6 @@ ctx.canvas.height = h;
 console.log("w - h : " + w + "-" + h)
 
 //ctx.font = "40px led";
-ctx.font = Math.round(4*w/100) + "px led";
-let bh_text = ctx.measureText("BLOCK_HEIGHT_")
-let spi_text = ctx.measureText("SIGNAGE_POINT_INDEX_")
-let abt_text = ctx.measureText("AVERAGE_BLOCK_TIME_")
-let dif_text = ctx.measureText("DIFFICULTY_")
-let mem_text = ctx.measureText("MEMPOOL_SIZE_")
-let space_text = ctx.measureText("TOTAL_NETSPACE_")
 
 let raf;
 
@@ -206,6 +199,16 @@ drawtext() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
+ctx.font = Math.round(4*h/100) + "px led";
+let bh_text = ctx.measureText("BLOCK_HEIGHT_")
+let spi_text = ctx.measureText("SIGNAGE_POINT_INDEX_")
+let abt_text = ctx.measureText("AVERAGE_BLOCK_TIME_")
+let dif_text = ctx.measureText("DIFFICULTY_")
+let mem_text = ctx.measureText("MEMPOOL_SIZE_")
+let space_text = ctx.measureText("TOTAL_NETSPACE_")
+
 
 blockchain_state();
 
