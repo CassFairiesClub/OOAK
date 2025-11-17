@@ -176,7 +176,7 @@ drawtext() {
     ctx.fillText("TOTAL NETSPACE", this.x1, 17*this.y1);
     ctx.fillText("TOTAL NETSPACE", this.x2, 17*this.y1);
     //ctx.fillStyle = "lime";
-    ctx.fillStyle = "HSL(" + 15 + this.hue % 360 + ",100%,50%)";
+    ctx.fillStyle = "HSL(" + 5 + this.hue % 360 + ",100%,50%)";
     ctx.fillText(numberWithSpaces(BLOCK.height1), this.x1 + bh_text, 3*this.y1);
     ctx.fillText(numberWithSpaces(BLOCK.height2), this.x2 + bh_text, 3*this.y1);
     ctx.fillText(BLOCK.spi1, this.x1 + spi_text, 5*this.y1);
@@ -249,3 +249,4 @@ ws.onmessage = (event) => {
 </body>
 
 </html>
+
