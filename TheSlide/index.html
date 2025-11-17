@@ -177,22 +177,22 @@ drawtext() {
     ctx.fillText("TOTAL NETSPACE", this.x2, 17*this.y1);
     //ctx.fillStyle = "lime";
     ctx.fillStyle = "HSL(" + 15 + this.hue % 360 + ",100%,50%)";
-    ctx.fillText(numberWithSpaces(BLOCK.height1), this.x1 + bh_text.width, 3*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.height2), this.x2 + bh_text.width, 3*this.y1);
-    ctx.fillText(BLOCK.spi1, this.x1 + spi_text.width, 5*this.y1);
-    ctx.fillText(BLOCK.spi2, this.x2 + spi_text.width, 5*this.y1);
-    ctx.fillText(BLOCK.abt1, this.x1 + abt_text.width, 7*this.y1);
-    ctx.fillText(BLOCK.abt2, this.x2 + abt_text.width, 7*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.dif1), this.x1 + dif_text.width, 9*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.dif2), this.x2 + dif_text.width, 9*this.y1);
-    ctx.fillText(BLOCK.msize1, this.x1 + mem_text.width, 11*this.y1);
-    ctx.fillText(BLOCK.msize2, this.x2 + mem_text.width, 11*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.mfees1), this.x1 + mem_text.width, 13*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.mfees2), this.x2 + mem_text.width, 13*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.mcost1), this.x1 + mem_text.width, 15*this.y1);
-    ctx.fillText(numberWithSpaces(BLOCK.mcost2), this.x2 + mem_text.width, 15*this.y1);
-    ctx.fillText(truncateDecimals(BLOCK.space1/1000000000000000000, 5) + " EB", this.x1 + space_text.width, 17*this.y1);
-    ctx.fillText(truncateDecimals(BLOCK.space2/1000000000000000000, 5) + " EB", this.x2 + space_text.width, 17*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.height1), this.x1 + bh_text, 3*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.height2), this.x2 + bh_text, 3*this.y1);
+    ctx.fillText(BLOCK.spi1, this.x1 + spi_text, 5*this.y1);
+    ctx.fillText(BLOCK.spi2, this.x2 + spi_text, 5*this.y1);
+    ctx.fillText(BLOCK.abt1, this.x1 + abt_text, 7*this.y1);
+    ctx.fillText(BLOCK.abt2, this.x2 + abt_text, 7*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.dif1), this.x1 + dif_text, 9*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.dif2), this.x2 + dif_text, 9*this.y1);
+    ctx.fillText(BLOCK.msize1, this.x1 + mem_text, 11*this.y1);
+    ctx.fillText(BLOCK.msize2, this.x2 + mem_text, 11*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mfees1), this.x1 + mem_text, 13*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mfees2), this.x2 + mem_text, 13*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mcost1), this.x1 + mem_text, 15*this.y1);
+    ctx.fillText(numberWithSpaces(BLOCK.mcost2), this.x2 + mem_text, 15*this.y1);
+    ctx.fillText(truncateDecimals(BLOCK.space1/1000000000000000000, 5) + " EB", this.x1 + space_text, 17*this.y1);
+    ctx.fillText(truncateDecimals(BLOCK.space2/1000000000000000000, 5) + " EB", this.x2 + space_text, 17*this.y1);
   },
 };
 
@@ -200,16 +200,32 @@ ctx.clearRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+var span;
 
-ctx.font = Math.round(4*h/100) + "px led";
-let bh_text = ctx.measureText("BLOCK_HEIGHT_")
+if ( w > h ) {
+    ctx.font = Math.round(4*h/100) + "px led";
+    span = 4*h/100 * 13/16;
+    console.log(span);
+} else {
+    ctx.font = Math.round(4*w/100) + "px led";
+    span = 4*w/100 * 13/16;
+    console.log(span);
+}
+
+let bh_text = 12*span;
+let spi_text = 19*span;
+let abt_text = 18*span;
+let dif_text = 11*span;
+let mem_text = 13*span;
+let space_text = 15*span;
+
+/*let bh_text = ctx.measureText("BLOCK_HEIGHT_")
 let spi_text = ctx.measureText("SIGNAGE_POINT_INDEX_")
 let abt_text = ctx.measureText("AVERAGE_BLOCK_TIME_")
 let dif_text = ctx.measureText("DIFFICULTY_")
 let mem_text = ctx.measureText("MEMPOOL_SIZE_")
 let space_text = ctx.measureText("TOTAL_NETSPACE_")
-
-
+*/
 blockchain_state();
 
 const ws = new WebSocket('wss://api.coinset.org/ws');
