@@ -1,7 +1,7 @@
 {
   "format": "CHIP-0007",
   "name": "CLICK!",
-  "description": "Unique CHIP-0015 compliant NFT. View on mintgarden.io website or open link in a browser for a full experience.",
+  "description": "Unique CHIP-0015 compliant NFT. Click the NFT on mintgarden.io website or open link in a browser for a full experience.",
   "minting_tool": "Cass",
   "sensitive_content": false,
   "attributes": [
@@ -38,3 +38,4 @@
     "url": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_004/"
   }
 }
+
