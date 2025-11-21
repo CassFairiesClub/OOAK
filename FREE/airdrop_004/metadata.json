@@ -8,6 +8,10 @@
     {
       "trait_type": "Airdrop",
       "value": "004"
+    },
+    {
+      "trait_type": "Link",
+      "value": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_004/"
     }
   ],
   "collection": {
@@ -38,4 +42,5 @@
     "url": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_004/"
   }
 }
+
 
