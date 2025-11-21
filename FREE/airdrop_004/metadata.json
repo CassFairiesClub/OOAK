@@ -1,13 +1,13 @@
 {
   "format": "CHIP-0007",
-  "name": "CCVF",
-  "description": "Crypto Currency Virtual Fantasy",
+  "name": "CLICK!",
+  "description": "Unique CHIP-0015 compliant NFT. View on mintgarden.io website or open link in a browser for a full experience.",
   "minting_tool": "Cass",
   "sensitive_content": false,
   "attributes": [
     {
       "trait_type": "Airdrop",
-      "value": "003"
+      "value": "004"
     }
   ],
   "collection": {
@@ -31,5 +31,10 @@
         "value": "@CassXCH"
       }
     ]
+  },
+  "data": {
+    "@context": "https://schema.org",
+    "@type": "WebContent",
+    "url": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_004/"
   }
 }
