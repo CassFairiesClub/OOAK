@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Where Art Thou?</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+        #middle {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+        #mycanvas {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="middle">
+        <canvas id="mycanvas" width="1000px" height="1000px"></canvas>
+    </div>
+    <script>
+        function car2pol({ x, y }) {
+            return {
+                r: Math.sqrt(x * x + y * y),
+                theta: Math.atan2(y, x)
+            };
+        }
+        function pol2car({ r, theta }) {
+            return {
+                x: r * Math.cos(theta),
+                y: r * Math.sin(theta)
+            };
+        }
+        var canvas = document.getElementById("mycanvas");
+        var ctx = canvas.getContext("2d");
+        var w = document.getElementById("middle").clientWidth;
+        var h = document.getElementById("middle").clientHeight;
+        
+        let wunit;
+        let hunit;
+        let cassxelX;
+        let cassxelY;
+        let size;
+        
+        if (ctx.canvas.width > ctx.canvas.height) {
+            ctx.canvas.width = h;
+            ctx.canvas.height = h;
+            wunit = h / 10;
+            hunit = h / 10;
+            cassxelX = h / 2;
+            cassxelY = h / 4;
+            size = h / 20;
+        } else {
+            ctx.canvas.width = w;
+            ctx.canvas.height = w;
+            wunit = w / 10;
+            hunit = w / 10;
+            cassxelX = w / 2;
+            cassxelY = w / 4;
+            size = w / 20;
+        }
+        
+        var canvasPos = getPosition(canvas);
+        var mouseX = 0;
+        var mouseY = 0;
+        let coordcar = { x: cassxelX, y: cassxelY };
+
+        function setMousePosition(e) {
+            mouseX = ball.x - canvasPos.x + (w-h)/2;
+            mouseY = ball.y - canvasPos.y;
+        }
+
+        const ball = {
+          x: 3*canvas.width/4,
+          y: canvas.height/4,
+          vx: 3,
+          vy: 4,
+          radius: 35,
+          hue: 0,
+          draw() {
+            let n = size / 10;
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 10 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#00ffff";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY - n, 9 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ffff00";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 8 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY - n, 7 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#800080";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 6 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#008080";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY - n, 5 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ff00ff";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 4 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY - n, 3 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#008080";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 2 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY - n, n, 0, 2 * Math.PI);
+            ctx.fillStyle = "#000000";
+            ctx.fill();
+  },
+};    
+
+        function update() {
+            setMousePosition();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (var x = 0; x < 6; x++) {
+            for (var y = 0; y < 6; y++) {
+                let noise = 0;
+                // let noise = Math.random()*5 + 0.5;
+                cassxel((2*x) * wunit, 2*(y) * hunit, noise+size*2, mouseX, mouseY)  ;
+                cassxel(2*(x + 0.5) * wunit, 2*(y + 0.5) * hunit, noise+size*2, mouseX, mouseY)  ;
+
+            }
+        }
+            // ball.draw();
+          ball.x += ball.vx;
+          ball.y += ball.vy;
+
+          if (
+            ball.y + ball.vy > canvas.height - ball.radius ||
+            ball.y + ball.vy < ball.radius
+          ) {
+            ball.vy = -ball.vy;
+          }
+          if (
+            ball.x + ball.vx > canvas.width - ball.radius ||
+            ball.x + ball.vx < ball.radius
+          ) {
+            ball.vx = -ball.vx;
+          }
+            requestAnimationFrame(update);
+        }
+
+        update();
+
+        function cassxel(x, y, size, mouseX, mouseY) {
+            let n = size / 10;
+            let X = mouseX - x
+            let Y = mouseY - y
+            
+            let color1 = "#090909";
+            let color2 = "#191919";
+            
+            let coordpol = car2pol({ x: X, y: Y })
+            coordcar = pol2car({ r: n, theta: coordpol.theta })
+            // console.log(coordpol.theta);
+
+            ctx.beginPath();
+            ctx.arc(x, y, 10 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "HSL(" + (coordpol.theta+3.14)*360/6.28 + ",80%,50%)";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y - n, 9 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = color2;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y, 8 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "HSL(" + (coordpol.theta+3.14)*360/6.28 + ",80%,50%)";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y - n, 7 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = color2;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y, 6 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "HSL(" + (coordpol.theta+3.14)*360/6.28 + ",80%,50%)";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y - n, 5 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = color2;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y, 4 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "HSL(" + (coordpol.theta+3.14)*360/6.28 + ",80%,50%)";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y - n, 3 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = color2;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, y, 2 * n, 0, 2 * Math.PI);
+            ctx.fillStyle = "HSL(" + (coordpol.theta+3.14)*360/6.28 + ",80%,50%)";
+            ctx.fill();
+
+            //console.log(coordpol.r)
+            if (coordpol.r < n) {
+                ctx.beginPath();
+                ctx.arc(mouseX, mouseY, n, 0, 2 * Math.PI);
+                ctx.fillStyle = "#000000";
+                ctx.fill();
+            } else {
+                ctx.beginPath();
+                ctx.arc(coordcar.x + x, coordcar.y + y, n, 0, 2 * Math.PI);
+                ctx.fillStyle = "#000000";
+                ctx.fill();
+            }
+        }
+        function getPosition(el) {
+            var xPosition = 0;
+            var yPosition = 0;
+
+            while (el) {
+                xPosition += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                yPosition += (el.offsetTop - el.scrollTop + el.clientTop);
+                el = el.offsetParent;
+            }
+            return {
+                x: xPosition,
+                y: yPosition
+            };
+        }
+    </script>
+</body>
+</html>
