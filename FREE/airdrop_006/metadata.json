@@ -1,0 +1,47 @@
+
+{
+  "format": "CHIP-0015",
+  "name": "Where Art Thou?",
+  "description": "Unique CHIP-0015 compliant NFT. View this NFT on mintgarden.io website or open link in a browser for a full experience.",
+  "minting_tool": "Cass",
+  "sensitive_content": false,
+  "attributes": [
+    {
+      "trait_type": "Airdrop",
+      "value": "005"
+    },
+    {
+      "trait_type": "Link",
+      "value": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_005/"
+    }
+  ],
+  "collection": {
+    "name": "0 MOJO",
+    "id": "551df667-be80-4ec7-9741-ca7d227446f2",
+    "attributes": [
+      {
+        "type": "description",
+        "value": "Follow @CassXCH for free NFTs"
+      },
+      {
+        "type": "icon",
+        "value": "https://raw.githubusercontent.com/CassFairiesClub/OOAK/refs/heads/main/FREE/free.png"
+      },
+      {
+        "type": "banner",
+        "value": "https://raw.githubusercontent.com/CassFairiesClub/OOAK/refs/heads/main/FREE/free_banner.png"
+      },
+      {
+        "type": "twitter",
+        "value": "@CassXCH"
+      }
+    ]
+  },
+  "data": {
+    "@context": "https://schema.org",
+    "@type": "WebContent",
+    "url": "https://cassfairiesclub.github.io/OOAK/FREE/airdrop_005/"
+  }
+}
+
+
